@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="{{ url_for('static',filename='styles/ourPage.css') }}">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<head>
+    <title>
+        External Memory Algorithm
+    </title>
+</head>
+
+<body class="main-content">
+    <form action="./Peeling" method="post">
+        <h1 class="heading">
+            Shortest Path Algorithm
+        </h1>
+        <div class="data-container">
+
+            <table style="border: 1px solid white; align-items: center;">
+                <thead>
+                    <td colspan="3">Dataset Name</td>
+                    <td colspan="3">Number of Nodes</td>
+                    <td colspan="3">Number of Edges</td>
+                    <td colspan="1">Select a database</td>
+                </thead>
+                <tr>
+                    <td colspan="3">Live Journal</td>
+                    <td colspan="3">11234</td>
+                    <td colspan="3">100000</td>
+                    <td colspan="1"><input type="radio" id="LiveJournal" name="Datasets" value="DB1"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">Smaller Dataset</td>
+                    <td colspan="3">Number of Nodes</td>
+                    <td colspan="3">Number of Edges</td>
+                    <td colspan="1"><input type="radio" id="DB2" name="Datasets" value="DB2"></td>
+                </tr>
+            </table>
+        </div>
+
+
+        <div class="page-layout-main">
+            <div class="container">
+
+                <div>
+                    Enter K value :
+                </div>
+                <div style="color: black;">
+                    {{ form.kValue() or kValue}}
+                </div>
+                <br>
+                    {% for message in form.kValue.errors %}
+                    <div>{{ message }}</div>
+                    {% endfor %}
+                <div class="generated-path">
+                    <img src="{{ url_for('static',filename='styles/img/shortestPath.jpg') }}" height="200px"
+                        width="400px">
+                </div>
+
+                <br>
+                <div>
+                    <Button class="btn btn-primary" type="submit">
+                        Start Algorithm
+                    </Button>
+                </div>
+
+            </div>
+
+            <div class="result-container">
+
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
