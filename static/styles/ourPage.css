@@ -53,10 +53,14 @@ h1 {
     margin-right: 300px;
 }
 
-.result-container {
+.k-core-graph {
+    margin-top: 70px;
+}
+
+/* .result-container {
     margin-top: 50px;
     margin-right: 50px;
-    position: relative;
+    position: absolute;
     color:white;
     float: right;
-}
+} */

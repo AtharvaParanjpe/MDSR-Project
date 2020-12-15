@@ -61,7 +61,6 @@
                 </div>
             </form>
         </div>
-
         <div class="result-container">
             <table style="float:right; border: 1px solid white; align-items: center;">
                 <thead>
@@ -69,18 +68,17 @@
                     <td colspan="3">Number of Nodes Removed</td>
                     <td colspan="3">Time Taken</td>
                 </thead>
+                {%for i in range(0, len(listOfLists))%} 
                 <tr>
-                    <td colspan="3">1</td>
-                    <td colspan="3">11234</td>
-                    <td colspan="3">100s</td>
+                    <td colspan="3">{{i+1}}</td>
+                    <td colspan="3">{{listOfLists[i][1]}}</td>
+                    <td colspan="3">{{listOfLists[i][1]}} s</td>
                 </tr>
-                <tr>
-                    <td colspan="3">2</td>
-                    <td colspan="3">123123123</td>
-                    <td colspan="3">21312312</td>
-                </tr>
+                {%endfor%} 
+                
             </table>
         </div>
+        
     </div>
 </body>
 

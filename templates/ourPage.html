@@ -12,14 +12,14 @@
 
 <head>
     <title>
-        External Memory Algorithm
+        Graph Peeling Algorithm
     </title>
 </head>
 
 <body class="main-content">
-    <form action="./Peeling" method="post">
+    <form action="/Peeling" method="post" role="form">
         <h1 class="heading">
-            Shortest Path Algorithm
+            Graph Peeling Algorithm
         </h1>
         <div class="data-container">
 
@@ -45,6 +45,25 @@
             </table>
         </div>
 
+        <div>
+            {% if(listOfList) %}
+            <table style="margin-top:50px; float:right; border: 1px solid white; align-items: center;">
+                <thead>
+                    <td colspan="3">Iteration Number</td>
+                    <td colspan="3">Number of Nodes Removed</td>
+                    <td colspan="3">Time Taken</td>
+                </thead>
+                {%for i in range(0, listOfList|length)%} 
+                <tr>
+                    <td colspan="3">{{i+1}}</td>
+                    <td colspan="3">{{listOfList[i][1]}}</td>
+                    <td colspan="3">{{listOfList[i][1]}} s</td>
+                </tr>
+                {%endfor%} 
+            </table>
+            {% endif %}
+        </div>
+        
 
         <div class="page-layout-main">
             <div class="container">
@@ -56,14 +75,10 @@
                     {{ form.kValue() or kValue}}
                 </div>
                 <br>
-                    {% for message in form.kValue.errors %}
-                    <div>{{ message }}</div>
-                    {% endfor %}
-                <div class="generated-path">
-                    <img src="{{ url_for('static',filename='styles/img/shortestPath.jpg') }}" height="200px"
-                        width="400px">
-                </div>
-
+                {% for message in form.kValue.errors %}
+                <div>{{ message }}</div>
+                {% endfor %}
+               
                 <br>
                 <div>
                     <Button class="btn btn-primary" type="submit">
@@ -71,12 +86,17 @@
                     </Button>
                 </div>
 
+                <div class="k-core-graph">
+                    <h3> 4-Core Decomposition for the entire graph </h3>
+                    <img src="{{ url_for('static',filename='styles/img/shortestPath.jpg') }}" height="200px"
+                        width="400px">
+                </div>
+
             </div>
 
-            <div class="result-container">
-
-            </div>
         </div>
+
+        
     </form>
 </body>
 
