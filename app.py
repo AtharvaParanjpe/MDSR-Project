@@ -120,7 +120,7 @@ def computeShortestPath():
         else:
             kValue = request.form["kValue"]
             listOfList = [ [1,11232,1000], [2,11232,1000]]
-            graph = create_interactive_graph(1000, int(kValue))
+            graph = create_interactive_graph(nodes, int(kValue))
             # listOfList = graphPeel.do_peeling(kValue, request.form["Datasets"], sc, spark)
             return render_template('ourPage.html', form=form, kValue = kValue, listOfList = listOfList, graph = graph)
     elif request.method == 'GET':
