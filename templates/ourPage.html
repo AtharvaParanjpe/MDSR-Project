@@ -37,17 +37,23 @@
                     <td colspan="1"><input type="radio" id="LiveJournal" name="Datasets" value="DB1"></td>
                 </tr>
                 <tr>
-                    <td colspan="3">Smaller Dataset</td>
-                    <td colspan="3">Number of Nodes</td>
-                    <td colspan="3">Number of Edges</td>
-                    <td colspan="1"><input type="radio" id="DB2" name="Datasets" value="DB2"></td>
+                    <td colspan="3">Wiki Talk Data</td>
+                    <td colspan="3">2394385</td>
+                    <td colspan="3">5021410</td>
+                    <td colspan="1"><input type="radio" id="wikiTalk" name="Datasets" value="WikiTalk.txt"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">Epinions Data</td>
+                    <td colspan="3">75879</td>
+                    <td colspan="3">508837</td>
+                    <td colspan="1"><input type="radio" id="epinions" name="Datasets" value="soc-Epinions1.txt"></td>
                 </tr>
             </table>
         </div>
 
         <div>
             {% if(listOfList) %}
-            <table style="margin-top:50px; float:right; border: 1px solid white; align-items: center;">
+            <table style="margin-top:50px; margin-right:200px; float:right; border: 1px solid white; align-items: center;">
                 <thead>
                     <td colspan="3">Iteration Number</td>
                     <td colspan="3">Number of Nodes Removed</td>
@@ -57,7 +63,7 @@
                 <tr>
                     <td colspan="3">{{i+1}}</td>
                     <td colspan="3">{{listOfList[i][1]}}</td>
-                    <td colspan="3">{{listOfList[i][1]}} s</td>
+                    <td colspan="3">{{listOfList[i][2]}} s</td>
                 </tr>
                 {%endfor%} 
             </table>
