@@ -29,8 +29,70 @@ import plotly
 import networkx as nx
 
 
+
+def generate_interactive_graph(G):
+    pos_ = nx.spring_layout(G)
+
+    def make_edge(x, y, text, width):
+        return  go.Scatter(x         = x,
+                        y         = y,
+                        line      = dict(width = width,
+                                    color = 'cornflowerblue'),
+                        hoverinfo = 'text',
+                        text      = ([text]),
+                        mode      = 'lines')
+    edge_trace = []
+    for edge in G.edges():
+        
+        
+        char_1 = edge[0]
+        char_2 = edge[1]
+        x0, y0 = pos_[char_1]
+        x1, y1 = pos_[char_2]
+        text   = str(char_1) + '--' + str(char_2) + ': ' + str(1)
+        trace  = make_edge([x0, x1, None], [y0, y1, None], text, 
+                            width = 0.3*1**1.75)
+        edge_trace.append(trace)
+
+
+    # Make a node trace
+    node_trace = go.Scatter(x         = [],
+                            y         = [],
+                            text      = [],
+                            textposition = "top center",
+                            textfont_size = 10,
+                            mode      = 'markers+text',
+                            hoverinfo = 'none',
+                            marker    = dict(color = [],
+                                            size  = [],
+                                            line  = None))
+    # For each node in midsummer, get the position and size and add to the node_trace
+    for node in G.nodes():
+        x, y = pos_[node]
+        node_trace['x'] += tuple([x])
+        node_trace['y'] += tuple([y])
+        node_trace['marker']['color'] += tuple(['cornflowerblue'])
+        node_trace['marker']['size'] += tuple([5*3])
+        node_trace['text'] += tuple(['<b>' + str(node) + '</b>'])
+
+    # Customize layout
+    layout = go.Layout(
+        paper_bgcolor='rgba(0,0,0,0)', # transparent background
+        plot_bgcolor='rgba(0,0,0,0)', # transparent 2nd background
+        xaxis =  {'showgrid': False, 'zeroline': False}, # no gridlines
+        yaxis = {'showgrid': False, 'zeroline': False}, # no gridlines
+    )
+    fig = go.Figure(layout = layout)
+    for trace in edge_trace:
+        fig.add_trace(trace)
+    fig.add_trace(node_trace)
+    fig.update_layout(showlegend = False)
+    fig.update_xaxes(showticklabels = False)
+    fig.update_yaxes(showticklabels = False)
+    fig.show()
+
 def create_interactive_graph(nodes, kValue):
-    G = nx.random_geometric_graph(nodes, kValue/8)
+    G = nx.random_geometric_graph(10, 0.125)
 
     edge_x = []
     edge_y = []
@@ -120,8 +182,18 @@ def computeShortestPath():
         else:
             kValue = request.form["kValue"]
             listOfList = [ [1,11232,1000], [2,11232,1000]]
-            graph = create_interactive_graph(nodes, int(kValue))
-            # listOfList = graphPeel.do_peeling(kValue, request.form["Datasets"], sc, spark)
+            # listOfList, graphName = graphPeel.do_peeling(kValue, request.form["Datasets"], sc, spark)
+            
+            Graphtype=nx.DiGraph()  
+
+            G = nx.read_edgelist(
+                graphName, 
+                create_using=Graphtype,
+                nodetype=int,
+                data=(('weight',float),)
+            )
+            graph = generate_interactive_graph(G)
+            
             return render_template('ourPage.html', form=form, kValue = kValue, listOfList = listOfList, graph = graph)
     elif request.method == 'GET':
         return render_template('ourPage.html', form = form)
