@@ -2,11 +2,27 @@ from flask import Flask, render_template, request, flash
 from forms import *
 from flask_wtf import FlaskForm
 import sys
+import graphPeel
 from wtforms import TextField, SubmitField, BooleanField
 
 from wtforms import validators, ValidationError
 from wtforms.validators import DataRequired
 
+import findspark
+findspark.init('/usr/local/Cellar/apache-spark/3.0.1/libexec')
+import pyspark
+from pyspark import SparkContext    
+from pyspark.sql import SparkSession 
+
+import numpy as np
+import os
+import time
+from pyspark.sql.types import *
+import time
+import os 
+
+sc = SparkContext('local')
+spark = SparkSession(sc) 
 app = Flask(__name__)
 app.secret_key = 'development key'
 
@@ -28,6 +44,7 @@ def computeShortestPath():
         ## Enter stuff here
 
             listOfList = [ [1,11232,1000], [2,11232,1000]]
+            listOfList = graphPeel.do_peeling(kValue, "test.txt", sc, spark)
 
             return render_template('ourPage.html', form=form, kValue = kValue, listOfList = listOfList)
     elif request.method == 'GET':
