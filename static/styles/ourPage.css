@@ -47,9 +47,9 @@ h1 {
 }
 
 .page-layout-main {
-    position: relative;
+    position: absolute;
     margin-left: 100px;
-    margin-top: 250px;
+    margin-top: 320px;
     margin-right: 300px;
 }
 

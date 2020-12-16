@@ -102,6 +102,20 @@ def do_peeling(k, file_name, sc, spark):
 	    print("--- %s seconds ---" % (time.time() - start_time))
 	    counter += 1
 
+	# outName = "graph_plot"
+	# try:
+	# 	os.remove("graph_plot.txt")
+
+	f = open("graph_plot.txt", "w")
+	data_source = data.select('source').collect()
+	data_dest = data.select('destination').collect()
+	for i in range(len(data_source)):
+		# print data_source[i].source
+		# print data_dest[i].destination
+		f.write(str(data_source[i].source) + "\t" + str(data_dest[i].destination) + "\n")
+	f.close()
+
+	# data.write.format("txt").save(outName)
 	print (data.count())    
 	print (data.show())
 	print ("----Done----")

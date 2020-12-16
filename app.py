@@ -1,25 +1,25 @@
 from flask import Flask, render_template, request, flash
 from flask_wtf import FlaskForm
 import sys
-# import graphPeel
+import graphPeel
 from wtforms import TextField, SubmitField, BooleanField
 
 from wtforms import validators, ValidationError
 from wtforms.validators import DataRequired
 
-# import findspark
-# findspark.init('/usr/local/Cellar/apache-spark/3.0.1/libexec')
-# import pyspark
-# from pyspark import SparkContext    
-# from pyspark.sql import SparkSession 
+import findspark
+findspark.init('/usr/local/Cellar/apache-spark/3.0.1/libexec')
+import pyspark
+from pyspark import SparkContext    
+from pyspark.sql import SparkSession 
 
 import numpy as np
 import os
 import time
-# from pyspark.sql.types import *
+from pyspark.sql.types import *
 import time
 import os 
-
+import sys
 
 
 import plotly.graph_objects as go
@@ -164,8 +164,8 @@ def create_interactive_graph(nodes, kValue):
 
 
 
-# sc = SparkContext('local')
-# spark = SparkSession(sc) 
+sc = SparkContext('local')
+spark = SparkSession(sc) 
 app = Flask(__name__)
 app.secret_key = 'development key'
 
@@ -182,18 +182,20 @@ def computeShortestPath():
         else:
             kValue = request.form["kValue"]
             listOfList = [ [1,11232,1000], [2,11232,1000]]
-            # listOfList, graphName = graphPeel.do_peeling(kValue, request.form["Datasets"], sc, spark)
-            
-            Graphtype=nx.DiGraph()  
+            listOfList = graphPeel.do_peeling(kValue, request.form["Datasets"], sc, spark)
+            print ("Before Graphtype ")
+            Graphtype=nx.Graph()  
+            print ("Before read_edgelist ")
+
 
             G = nx.read_edgelist(
-                graphName, 
+                "graph_plot.txt", 
                 create_using=Graphtype,
                 nodetype=int,
-                data=(('weight',float),)
             )
+            print ("Before generate_interactive_graph ")
             graph = generate_interactive_graph(G)
-            
+            print ("After generate_interactive_graph ")
             return render_template('ourPage.html', form=form, kValue = kValue, listOfList = listOfList, graph = graph)
     elif request.method == 'GET':
         return render_template('ourPage.html', form = form)
