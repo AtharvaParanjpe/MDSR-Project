@@ -23,7 +23,6 @@ The resources for the background image and the css can be obtained under the 'st
 ## Running the code
 You can run the code by: 
 - clone the repository
-- rename the file containing graph data inside app.py
 - pip install flask, plotly, networkx
-- run :  python app.py in terminal
+- run :  python app.py in terminal in the folder of the repository
 - webapp runs at : localhost:8080/Peeling
