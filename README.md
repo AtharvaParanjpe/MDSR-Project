@@ -6,12 +6,12 @@ Our main template is ourPage.html which is conditionally rendering the input and
 
 ## Graphpeel.py 
 Includes our pyspark code which we used to run graph peeling using batching of the data.
-In this we us the following algorithmic <br/>
+In this we implement the following algorithm: <br/>
 Given a graph G and peeling value k, 
 
-    - Remove vertices of degree less than or equal to k from G
-    - If there are vertices left, G = G - the edges of the removed vertices
-    - Repeat from step 1 until there are no vertices of degree less than k remaining
+    - Find vertices of degree less than or equal to k in G
+    - If such vertices are found, G = G - edges of the found vertices
+    - Repeat from step 1 until there are no vertices of degree less than or equal to k remaining
 We have outputted the number of nodes removed at every iteration and have modularized every function to be easily integrable in case of future extension.
 
 ## Test.txt
