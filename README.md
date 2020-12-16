@@ -6,7 +6,7 @@ Our main template is ourPage.html which is conditionally rendering the input and
 
 ## Graphpeel.py 
 Includes our pyspark code which we used to run graph peeling using batching of the data.
-In this we follows our algorithmic logic <br/>
+In this we us the following algorithmic <br/>
 Given a graph G and peeling value k, 
 
     - Remove vertices of degree less than or equal to k from G
